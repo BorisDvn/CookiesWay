@@ -65,11 +65,15 @@ sub_request_thread = threading.Thread(target=sub_request)
 sub_request_thread.start()
 
 pygame.init()
+pygame.mixer.init()
 
 # Display
 size = (300, 480)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Cookies Way')
+
+# music
+pygame.mixer.music.load('music.mp3')
 
 # Entities
 cookie1 = Cookie(20)
@@ -117,6 +121,7 @@ j = random.randint(5, 250)
 k = random.randint(5, 250)
 position = 3  # random.choice([1, 2, 3])
 
+pygame.mixer.music.play(-1)
 while keepGoing:
     # Event Handling
     for event in pygame.event.get():
