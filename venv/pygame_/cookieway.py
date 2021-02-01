@@ -64,11 +64,12 @@ def sub_request():
 sub_request_thread = threading.Thread(target=sub_request)
 sub_request_thread.start()
 
+# Initialization pygame
 pygame.init()
 pygame.mixer.init()
 
 # Display
-size = (300, 480)
+size = (300, 475)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Cookies Way')
 
