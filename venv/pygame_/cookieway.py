@@ -142,12 +142,10 @@ while keepGoing:
             print('left')
             if barre.rect.left > 0:  # If the player is inside the playing field
                 barre.rect.left -= 5  # Decrease x position. The player goes left
-
         if r == True:
             print('right')
             if barre.rect.left < 300 - 100:  # If the player is inside the playing field
                 barre.rect.left += 5  # Increase x position. The player goes right
-
         if n == True:
             print('neutral')
             barre.rect.left = 105  # center
