@@ -5,14 +5,18 @@ import pygame
 from pygame.locals import *
 import random
 from entity import *
-#from facial_expression import *
 
+# Initialization pygame
 pygame.init()
+pygame.mixer.init()
 
 # Display
 size = (300, 480)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Cookies Way')
+
+# music
+pygame.mixer.music.load('music.mp3')
 
 # Entities
 cookie1 = Cookie(20)
@@ -42,8 +46,14 @@ bg_red = pygame.Surface(size)
 bg_red = bg_red.convert()
 bg_red.fill((25, 0, 0))
 
+# gameover
+gameover = pygame.image.load('gameover.png')
+gameover = pygame.transform.scale(gameover, (100,100))
+
+# Font
 font = None
-font = pygame.font.Font(None, 25)
+font = pygame.font.SysFont('constantia', 25)
+
 # Actions ---> Alter
 # Assign Variables
 keepGoing = True
@@ -61,6 +71,9 @@ k = random.randint(5, 250)
 
 position = 3  # random.choice([1, 2, 3])
 
+# Play Background music
+pygame.mixer.music.play(-1)
+
 while keepGoing:
 
     #clock.tick(30)
@@ -75,11 +88,15 @@ while keepGoing:
             cookie1.cry()
             count += 1
             screen.blit(bg_red, (0, 0))
-        elif corona1.collision(barre.rect.left,barre.rect.top) or corona2.collision(barre.rect.left,barre.rect.top)\
-                or corona3.collision(barre.rect.left,barre.rect.top):
+        elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left,                                                                                         barre.rect.top) \
+                 or corona3.collision(barre.rect.left, barre.rect.top):
             screen.blit(bg_red, (0, 0))
-            text = font.render(' Game Over', True, Color('White'))
-            screen.blit(text, (100, 200))
+            score = font.render('Score:' + str(count), True, Color('White'))
+            screen.blit(score, (100, 150))
+            screen.blit(gameover, (100, 180))
+            pygame.display.flip()
+            cookie1.dead()  # play deadsound
+            # keepGoing = False
             break
 
         if event.type == pygame.KEYDOWN:

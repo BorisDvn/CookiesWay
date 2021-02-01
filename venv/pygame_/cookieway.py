@@ -122,7 +122,9 @@ j = random.randint(5, 250)
 k = random.randint(5, 250)
 position = 3  # random.choice([1, 2, 3])
 
+# Play Background music
 pygame.mixer.music.play(-1)
+
 while keepGoing:
     # Event Handling
     for event in pygame.event.get():
@@ -136,7 +138,7 @@ while keepGoing:
         elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left, barre.rect.top) \
                 or corona3.collision(barre.rect.left, barre.rect.top):
             screen.blit(bg_red, (0, 0))
-            score = font.render(' Score: ' + str(count), True, Color('White'))
+            score = font.render('Score:' + str(count), True, Color('White'))
             screen.blit(score, (100, 150))
             screen.blit(gameover, (100, 180))
             pygame.display.flip()
