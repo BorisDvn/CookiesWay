@@ -41,6 +41,7 @@ def sub_request():
     cortex.ws.send(json.dumps(sub_request_json))
     while True:
         new_data = cortex.ws.recv()  # result of request
+        print(new_data)
         try:
             global l, r, n  # get mental commands from HeadSet
             if json.loads(new_data)["com"][0] == 'left':
@@ -55,7 +56,6 @@ def sub_request():
                 n = True
                 l = False
                 r = False
-            print(new_date)
         except:
             pass
 
@@ -104,15 +104,12 @@ gameover = pygame.transform.scale(gameover, (100,100))
 
 # Font
 font = None
-font = pygame.font.Font(None, 25)
+font = pygame.font.SysFont('constantia', 25)
 
 # Actions ---> Alter
 # Assign Variables
 keepGoing = True
 count = 0
-
-# Key for Move  r , l , n, none
-keys = [False, False, False, False]
 
 # Random position for Corona Cookies
 i = random.randint(10, 250)
@@ -143,358 +140,103 @@ while keepGoing:
 
         if l == True:
             print('left')
-            keys[0] = True
-            keys[1] = False
-            keys[2] = False
-            keys[3] = False
-        if r == True:
-            print('right')
-            keys[1] = True
-            keys[0] = False
-            keys[2] = False
-            keys[3] = False
-        if n == True:
-            print('neutral')
-            keys[1] = False
-            keys[0] = False
-            keys[2] = True
-            keys[3] = False
-
-        # left
-        if keys[0]:
             if barre.rect.left > 0:  # If the player is inside the playing field
                 barre.rect.left -= 5  # Decrease x position. The player goes left
-                if position == 1:
-                    sprite_group.remove(cookie1)
-                    sprite_group.remove(corona2)
-                    sprite_group.remove(corona3)
-                    if (i < 475):
-                        corona1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-                        sprite_group.add(cookie1)
-                        sprite_group.add(corona2)
-                        sprite_group.add(corona3)
-                        position = random.choice([1, 2, 3])
 
-                    if (j < 475):
-                        cookie2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-
-                    if (k < 475):
-                        cookie3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-
-                if position == 2:
-                    sprite_group.remove(cookie2)
-                    sprite_group.remove(corona1)
-                    sprite_group.remove(corona3)
-                    if (i < 475):
-                        cookie1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-
-                    if (j < 475):
-                        corona2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-                        sprite_group.add(cookie2)
-                        sprite_group.add(corona1)
-                        sprite_group.add(corona3)
-                        position = random.choice([1, 2, 3])
-
-                    if (k < 475):
-                        cookie3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-
-                if position == 3:
-                    sprite_group.remove(cookie3)
-                    sprite_group.remove(corona1)
-                    sprite_group.remove(corona2)
-                    if (i < 470):
-                        cookie1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-
-                    if (j < 470):
-                        cookie2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-
-                    if (k < 470):
-                        corona3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-                        sprite_group.add(cookie3)
-                        sprite_group.add(corona1)
-                        sprite_group.add(corona2)
-                        position = random.choice([1, 2, 3])
-            else:
-                keys[3] = True
-
-        # right
-        elif keys[1]:
+        if r == True:
+            print('right')
             if barre.rect.left < 300 - 100:  # If the player is inside the playing field
                 barre.rect.left += 5  # Increase x position. The player goes right
-                if position == 1:
-                    sprite_group.remove(cookie1)
-                    sprite_group.remove(corona2)
-                    sprite_group.remove(corona3)
-                    if (i < 475):
-                        corona1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-                        sprite_group.add(cookie1)
-                        sprite_group.add(corona2)
-                        sprite_group.add(corona3)
-                        position = random.choice([1, 2, 3])
 
-                    if (j < 475):
-                        cookie2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-
-                    if (k < 475):
-                        cookie3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-
-                if position == 2:
-                    sprite_group.remove(cookie2)
-                    sprite_group.remove(corona1)
-                    sprite_group.remove(corona3)
-                    if (i < 475):
-                        cookie1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-
-                    if (j < 475):
-                        corona2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-                        sprite_group.add(cookie2)
-                        sprite_group.add(corona1)
-                        sprite_group.add(corona3)
-                        position = random.choice([1, 2, 3])
-
-                    if (k < 475):
-                        cookie3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-
-                if position == 3:
-                    sprite_group.remove(cookie3)
-                    sprite_group.remove(corona1)
-                    sprite_group.remove(corona2)
-                    if (i < 470):
-                        cookie1.bouger(i)
-                        i += 2
-                    else:
-                        i = random.randint(10, 30)
-
-                    if (j < 470):
-                        cookie2.bouger(j)
-                        j += 2
-                    else:
-                        j = random.randint(10, 20)
-
-                    if (k < 470):
-                        corona3.bouger(k)
-                        k += 2
-                    else:
-                        k = random.randint(10, 30)
-                        sprite_group.add(cookie3)
-                        sprite_group.add(corona1)
-                        sprite_group.add(corona2)
-                        position = random.choice([1, 2, 3])
-            else:
-                keys[3] = True
-
-        # Neutral
-        if keys[2]:
+        if n == True:
+            print('neutral')
             barre.rect.left = 105  # center
-            if position == 1:
-                sprite_group.remove(cookie1)
-                sprite_group.remove(corona2)
-                sprite_group.remove(corona3)
-                if (i < 475):
-                    corona1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
-                    sprite_group.add(cookie1)
-                    sprite_group.add(corona2)
-                    sprite_group.add(corona3)
-                    position = random.choice([1, 2, 3])
 
-                if (j < 475):
-                    cookie2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
+        # Move: Cookies and Corona
+        if position == 1:
+            sprite_group.remove(cookie1)
+            sprite_group.remove(corona2)
+            sprite_group.remove(corona3)
+            if (i < 475):
+                corona1.bouger(i)
+                i += 2
+            else:
+                i = random.randint(10, 30)
+                sprite_group.add(cookie1)
+                sprite_group.add(corona2)
+                sprite_group.add(corona3)
+                position = random.choice([1, 2, 3])
 
-                if (k < 475):
-                    cookie3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
+            if (j < 475):
+                cookie2.bouger(j)
+                j += 2
+            else:
+                j = random.randint(10, 20)
 
-            if position == 2:
-                sprite_group.remove(cookie2)
-                sprite_group.remove(corona1)
-                sprite_group.remove(corona3)
-                if (i < 475):
-                    cookie1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
+            if (k < 475):
+                cookie3.bouger(k)
+                k += 2
+            else:
+                k = random.randint(10, 30)
 
-                if (j < 475):
-                    corona2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
-                    sprite_group.add(cookie2)
-                    sprite_group.add(corona1)
-                    sprite_group.add(corona3)
-                    position = random.choice([1, 2, 3])
+        if position == 2:
+            sprite_group.remove(cookie2)
+            sprite_group.remove(corona1)
+            sprite_group.remove(corona3)
+            if (i < 475):
+                cookie1.bouger(i)
+                i += 2
+            else:
+                i = random.randint(10, 30)
 
-                if (k < 475):
-                    cookie3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
+            if (j < 475):
+                corona2.bouger(j)
+                j += 2
+            else:
+                j = random.randint(10, 20)
+                sprite_group.add(cookie2)
+                sprite_group.add(corona1)
+                sprite_group.add(corona3)
+                position = random.choice([1, 2, 3])
 
-            if position == 3:
-                sprite_group.remove(cookie3)
-                sprite_group.remove(corona1)
-                sprite_group.remove(corona2)
-                if (i < 470):
-                    cookie1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
+            if (k < 475):
+                cookie3.bouger(k)
+                k += 2
+            else:
+                k = random.randint(10, 30)
 
-                if (j < 470):
-                    cookie2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
+        if position == 3:
+            sprite_group.remove(cookie3)
+            sprite_group.remove(corona1)
+            sprite_group.remove(corona2)
+            if (i < 470):
+                cookie1.bouger(i)
+                i += 2
+            else:
+                i = random.randint(10, 30)
 
-                if (k < 470):
-                    corona3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
-                    sprite_group.add(cookie3)
-                    sprite_group.add(corona1)
-                    sprite_group.add(corona2)
-                    position = random.choice([1, 2, 3])
+            if (j < 470):
+                cookie2.bouger(j)
+                j += 2
+            else:
+                j = random.randint(10, 20)
 
-        # Empty
-        if keys[3]:
-            if position == 1:
-                sprite_group.remove(cookie1)
-                sprite_group.remove(corona2)
-                sprite_group.remove(corona3)
-                if (i < 475):
-                    corona1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
-                    sprite_group.add(cookie1)
-                    sprite_group.add(corona2)
-                    sprite_group.add(corona3)
-                    position = random.choice([1, 2, 3])
-
-                if (j < 475):
-                    cookie2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
-
-                if (k < 475):
-                    cookie3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
-
-            if position == 2:
-                sprite_group.remove(cookie2)
-                sprite_group.remove(corona1)
-                sprite_group.remove(corona3)
-                if (i < 475):
-                    cookie1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
-
-                if (j < 475):
-                    corona2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
-                    sprite_group.add(cookie2)
-                    sprite_group.add(corona1)
-                    sprite_group.add(corona3)
-                    position = random.choice([1, 2, 3])
-
-                if (k < 475):
-                    cookie3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
-
-            if position == 3:
-                sprite_group.remove(cookie3)
-                sprite_group.remove(corona1)
-                sprite_group.remove(corona2)
-                if (i < 470):
-                    cookie1.bouger(i)
-                    i += 2
-                else:
-                    i = random.randint(10, 30)
-
-                if (j < 470):
-                    cookie2.bouger(j)
-                    j += 2
-                else:
-                    j = random.randint(10, 20)
-
-                if (k < 470):
-                    corona3.bouger(k)
-                    k += 2
-                else:
-                    k = random.randint(10, 30)
-                    sprite_group.add(cookie3)
-                    sprite_group.add(corona1)
-                    sprite_group.add(corona2)
-                    position = random.choice([1, 2, 3])
+            if (k < 470):
+                corona3.bouger(k)
+                k += 2
+            else:
+                k = random.randint(10, 30)
+                sprite_group.add(cookie3)
+                sprite_group.add(corona1)
+                sprite_group.add(corona2)
+                position = random.choice([1, 2, 3])
 
         pygame.time.set_timer(USEREVENT, 30)
         screen.blit(bg, (0, 0))
         sprite_group.update()
         sprite_group.draw(screen)
-        text = font.render(' Score: ' + str(count), True, Color('White'))
-        screen.blit(text, (10, 10))
+        text = font.render('Score:' + str(count), True, Color('White'))
+        screen.blit(text, (10, 5))
 
     # Redisplay
     pygame.display.flip()
