@@ -138,7 +138,7 @@ while keepGoing:
             screen.blit(gameover, (100, 180))
             pygame.display.flip()
             cookie1.dead() # deadsound
-            #keepGoing = False
+            # keepGoing = False
             break
 
         if l == True:
