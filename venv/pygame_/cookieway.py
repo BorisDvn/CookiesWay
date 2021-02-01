@@ -34,15 +34,15 @@ sub_request_json = {
     "id": SUB_REQUEST_ID
 }
 
-l, r, n = False, False, False #left right neutral
+l, r, n = False, False, False  # left right neutral
+
 
 def sub_request():
     cortex.ws.send(json.dumps(sub_request_json))
     while True:
         new_data = cortex.ws.recv()  # result of request
-
         try:
-            global l,r,n
+            global l, r, n  # get mental commands from HeadSet
             if json.loads(new_data)["com"][0] == 'left':
                 n = False
                 l = True
@@ -59,7 +59,8 @@ def sub_request():
         except:
             pass
 
-#Thread for sub_request
+
+# Thread for sub_request
 sub_request_thread = threading.Thread(target=sub_request)
 sub_request_thread.start()
 
@@ -79,7 +80,6 @@ corona2 = Corona(120)
 corona3 = Corona(220)
 barre = Barre()
 
-
 sprite_group = pygame.sprite.Group()
 sprite_group.add(cookie1)
 sprite_group.add(cookie2)
@@ -89,48 +89,48 @@ sprite_group.add(corona2)
 sprite_group.add(corona3)
 sprite_group.add(barre)
 
-# background
+# Background
 bg = pygame.image.load('bg.png')
 bg = pygame.transform.scale(bg, (size))
-
-#GameOver
-#gameover = pygame.image.load('gameover.png').convert()
-#gameover = pygame.transform.scale(gameover, (100,100))
-
+# flash collision
+bg_red = pygame.Surface(size)
+bg_red = bg_red.convert()
+bg_red.fill((25, 0, 0))
+# Font
 font = None
 font = pygame.font.Font(None, 25)
+
 # Actions ---> Alter
 # Assign Variables
 keepGoing = True
 count = 0
-clock = pygame.time.Clock()
 
-# Key _ Tastatur r , l , n, none
+# Key for Move  r , l , n, none
 keys = [False, False, False, False]
 
-# Loop
+# Random position for Corona Cookies
 i = random.randint(10, 250)
 j = random.randint(5, 250)
 k = random.randint(5, 250)
-
 position = 3  # random.choice([1, 2, 3])
 
 while keepGoing:
-    #print(t.newMethode())
-    clock.tick(30)
     # Event Handling
     for event in pygame.event.get():
         if event.type == QUIT:
             keepGoing = False
             break
-        elif cookie1.collision(barre.rect.left,barre.rect.top) or cookie2.collision(barre.rect.left,barre.rect.top)\
-                or cookie3.collision(barre.rect.left,barre.rect.top):
-            #cookie1.cry()
+        elif cookie1.collision(barre.rect.left, barre.rect.top) or cookie2.collision(barre.rect.left, barre.rect.top) \
+                or cookie3.collision(barre.rect.left, barre.rect.top):
+            cookie1.cry()
             count += 1
-        elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left,barre.rect.top)\
-             or corona3.collision(barre.rect.left, barre.rect.top):
-            keepGoing = False
-            #cookie1.cry()
+        elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left, barre.rect.top) \
+                or corona3.collision(barre.rect.left, barre.rect.top):
+            screen.blit(bg_red, (0, 0))
+            textgo = font.render(' Game Over ', True, Color('White'))
+            screen.blit(textgo, (100, 200))
+            cookie1.dead() # deadsound
+            #keepGoing = False
             break
 
         if l == True:
@@ -139,13 +139,13 @@ while keepGoing:
             keys[1] = False
             keys[2] = False
             keys[3] = False
-        if  r == True:
+        if r == True:
             print('right')
             keys[1] = True
             keys[0] = False
             keys[2] = False
             keys[3] = False
-        if  n == True:
+        if n == True:
             print('neutral')
             keys[1] = False
             keys[0] = False
@@ -233,14 +233,9 @@ while keepGoing:
                         sprite_group.add(corona1)
                         sprite_group.add(corona2)
                         position = random.choice([1, 2, 3])
-                #pygame.time.set_timer(USEREVENT, 30)
-                screen.blit(bg, (0, 0))
-                sprite_group.update()
-                sprite_group.draw(screen)
-                text = font.render(' Score: ' + str(count), True, Color('White'))
-                screen.blit(text, (10, 10))
             else:
                 keys[3] = True
+
         # right
         elif keys[1]:
             if barre.rect.left < 300 - 100:  # If the player is inside the playing field
@@ -322,17 +317,12 @@ while keepGoing:
                         sprite_group.add(corona1)
                         sprite_group.add(corona2)
                         position = random.choice([1, 2, 3])
-                #pygame.time.set_timer(USEREVENT, 30)
-                screen.blit(bg, (0, 0))
-                sprite_group.update()
-                sprite_group.draw(screen)
-                text = font.render(' Score: ' + str(count), True, Color('White'))
-                screen.blit(text, (10, 10))
             else:
                 keys[3] = True
+
         # Neutral
         if keys[2]:
-            barre.rect.left = 105 #center
+            barre.rect.left = 105  # center
             if position == 1:
                 sprite_group.remove(cookie1)
                 sprite_group.remove(corona2)
@@ -491,12 +481,12 @@ while keepGoing:
                     sprite_group.add(corona2)
                     position = random.choice([1, 2, 3])
 
-    pygame.time.set_timer(USEREVENT, 30)
-    screen.blit(bg, (0, 0))
-    sprite_group.update()
-    sprite_group.draw(screen)
-    text = font.render(' Score: ' + str(count), True, Color('White'))
-    screen.blit(text, (10, 10))
+        pygame.time.set_timer(USEREVENT, 30)
+        screen.blit(bg, (0, 0))
+        sprite_group.update()
+        sprite_group.draw(screen)
+        text = font.render(' Score: ' + str(count), True, Color('White'))
+        screen.blit(text, (10, 10))
 
     # Redisplay
     pygame.display.flip()
