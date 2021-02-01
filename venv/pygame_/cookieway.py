@@ -127,7 +127,7 @@ while keepGoing:
                 or cookie3.collision(barre.rect.left,barre.rect.top):
             #cookie1.cry()
             count += 1
-        elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left,barre.rect.top) \
+        elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left,barre.rect.top)\
              or corona3.collision(barre.rect.left, barre.rect.top):
             keepGoing = False
             #cookie1.cry()
@@ -243,7 +243,7 @@ while keepGoing:
                 keys[3] = True
         # right
         elif keys[1]:
-            if barre.rect.left < 300 - 85:  # If the player is inside the playing field
+            if barre.rect.left < 300 - 100:  # If the player is inside the playing field
                 barre.rect.left += 5  # Increase x position. The player goes right
                 if position == 1:
                     sprite_group.remove(cookie1)

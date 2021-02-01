@@ -52,7 +52,7 @@ class Barre(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('barre.png')
-        self.image = pygame.transform.scale(self.image, (85, 65))
+        self.image = pygame.transform.scale(self.image, (100, 80))
         self.rect = self.image.get_rect()
         self.rect.left = 20
         self.rect.top = 380
