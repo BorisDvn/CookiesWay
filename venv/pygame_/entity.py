@@ -25,8 +25,10 @@ class Cookie(pygame.sprite.Sprite):
         self.sound.play()
 
     def collision(self, pos_x, pos_y):
-        if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top == pos_y :
+        if pos_x-3<=self.rect.left and pos_x+103>=self.rect.left and pos_y-2<=self.rect.top and pos_y+2 >=self.rect.top:
             return True
+        #if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top == pos_y :
+        #    return True
         #return self.rect.collidepoint(pos)
 
 
@@ -44,7 +46,7 @@ class Corona(pygame.sprite.Sprite):
         self.rect.top = y
 
     def collision(self, pos_x, pos_y):
-        if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top==pos_y:
+        if pos_x-3<=self.rect.left and pos_x+103>=self.rect.left and pos_y-2<=self.rect.top and pos_y+2 >=self.rect.top:
             return True
 
 
