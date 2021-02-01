@@ -92,10 +92,16 @@ sprite_group.add(barre)
 # Background
 bg = pygame.image.load('bg.png')
 bg = pygame.transform.scale(bg, (size))
+
 # flash collision
 bg_red = pygame.Surface(size)
 bg_red = bg_red.convert()
 bg_red.fill((25, 0, 0))
+
+# gameover
+gameover = pygame.image.load('gameover.png')
+gameover = pygame.transform.scale(gameover, (100,100))
+
 # Font
 font = None
 font = pygame.font.Font(None, 25)
@@ -127,8 +133,10 @@ while keepGoing:
         elif corona1.collision(barre.rect.left, barre.rect.top) or corona2.collision(barre.rect.left, barre.rect.top) \
                 or corona3.collision(barre.rect.left, barre.rect.top):
             screen.blit(bg_red, (0, 0))
-            textgo = font.render(' Game Over ', True, Color('White'))
-            screen.blit(textgo, (100, 200))
+            score = font.render(' Score: ' + str(count), True, Color('White'))
+            screen.blit(score, (100, 150))
+            screen.blit(gameover, (100, 180))
+            pygame.display.flip()
             cookie1.dead() # deadsound
             #keepGoing = False
             break

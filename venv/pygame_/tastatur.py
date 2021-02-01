@@ -33,9 +33,10 @@ sprite_group.add(corona2)
 sprite_group.add(corona3)
 sprite_group.add(barre)
 
-# background
-bg = pygame.image.load('img1.png')
+# Background
+bg = pygame.image.load('bg.png')
 bg = pygame.transform.scale(bg, (size))
+
 # flash collision
 bg_red = pygame.Surface(size)
 bg_red = bg_red.convert()
