@@ -314,8 +314,9 @@ while keepGoing:
                 screen.blit(text, (10, 10))
             else:
                 keys[2] = True
-        #elif event.type == USEREVENT:
+        # Neutral
         if keys[2]:
+            #barre.rect.left = 105  # Increase x position. The player goes right
             if position == 1:
                 sprite_group.remove(cookie1)
                 sprite_group.remove(corona2)
