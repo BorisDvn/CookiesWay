@@ -13,8 +13,8 @@ import threading
 SUB_REQUEST_ID = 6
 
 user = {
-    "client_id": "bNhy8kMvfbvi16uWqRL5VbGnHaKrFAESiyHi7y4G",
-    "client_secret": "FPVm8V0fbBnXh8Mp5uQwB1jC3qMPWI2pqumAHUEc7l0h1rbgGci7APl3dA8qtLWewjsEZsEN9T4FIM6TAWC654864CqS7o6JLwkgOUFJtPwakjNk2JYi2qFkDGDcCd8U",
+    "client_id": "your id",
+    "client_secret": "your client_Secret",
     "debit": 100
 }  # "license" : "your emotivpro license, which could use for third party app",
 
