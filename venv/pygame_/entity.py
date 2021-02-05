@@ -15,6 +15,7 @@ class Cookie(pygame.sprite.Sprite):
         self.image = pygame.image.load('cookies.png')
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.sound = pygame.mixer.Sound('son01.wav')
+        self.deadsound = pygame.mixer.Sound('GameOVer.wav')
         self.rect = self.image.get_rect()
         self.rect.left = y
 
@@ -24,9 +25,14 @@ class Cookie(pygame.sprite.Sprite):
     def cry(self):
         self.sound.play()
 
+    def dead(self):
+        self.deadsound.play()
+
     def collision(self, pos_x, pos_y):
-        if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top == pos_y :
+        if pos_x-3<=self.rect.left and pos_x+103>=self.rect.left and pos_y-2<=self.rect.top and pos_y+2 >=self.rect.top:
             return True
+        #if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top == pos_y :
+        #    return True
         #return self.rect.collidepoint(pos)
 
 
@@ -44,7 +50,7 @@ class Corona(pygame.sprite.Sprite):
         self.rect.top = y
 
     def collision(self, pos_x, pos_y):
-        if pos_x-2<=self.rect.left and pos_x+85>=self.rect.left and self.rect.top==pos_y:
+        if pos_x-3<=self.rect.left and pos_x+103>=self.rect.left and pos_y-2<=self.rect.top and pos_y+2 >=self.rect.top:
             return True
 
 
@@ -52,7 +58,7 @@ class Barre(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('barre.png')
-        self.image = pygame.transform.scale(self.image, (85, 65))
+        self.image = pygame.transform.scale(self.image, (100, 80))
         self.rect = self.image.get_rect()
         self.rect.left = 20
         self.rect.top = 380
